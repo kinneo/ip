@@ -6,7 +6,8 @@ public class Kin {
         System.out.println("Hello! I'm Kin");
         Scanner in = new Scanner(System.in);
         System.out.println("What can I do for you?");
-        String[] list = new String[100];
+        // String[] list = new String[100];
+        Task[] list = new Task[100];
         int count = 0;
         String line = "";
         while (!(line.equals("bye"))) {
@@ -27,11 +28,12 @@ public class Kin {
                 if (line.length() > 5 && Character.isDigit(line.charAt(5))){
                     int mark = Integer.parseInt(line.substring(5).trim()) - 1;
                     if(mark >= 0 && mark < count){
-                        if (list[mark].startsWith("[ ]")) {
-                            list[mark] = list[mark].replace("[ ]", "[x]");
+                        if (list[mark].getStatusIcon().equals(" ")) {
+                            //list[mark] = list[mark].replace("[ ]", "[x]");
+                            list[mark].markAsDone();
                             System.out.println("Nice! I've marked this task as done:");
                             System.out.println(list[mark]);
-                        } else if(list[mark].startsWith("[x]")){
+                        } else {
                             System.out.println("Task is already marked!");
                         }
                     } else {
@@ -44,11 +46,12 @@ public class Kin {
                 if (line.length() > 7 && Character.isDigit(line.charAt(7))){
                     int unmark = Integer.parseInt(line.substring(7).trim()) - 1;
                     if(unmark >= 0 && unmark < count){
-                        if (list[unmark].startsWith("[x]")) {
-                            list[unmark] = list[unmark].replace("[x]", "[ ]");
+                        if (list[unmark].getStatusIcon().equals("X")) {
+                            //list[unmark] = list[unmark].replace("[x]", "[ ]");
+                            list[unmark].unmarkAsDone();
                             System.out.println("OK, I've marked this task as not done yet:");
                             System.out.println(list[unmark]);
-                        } else if (list[unmark].startsWith("[ ]")){
+                        } else  {
                             System.out.println("Task is already unmarked!");
                         }
                     } else {
@@ -59,7 +62,8 @@ public class Kin {
                 }
             } else {
                 // store the line into list arr
-                list[count] = "[ ] " + line;
+                // list[count] = "[ ] " + line;
+                list[count] = new Task(line);
                 count++;
                 System.out.println("added " + line);
             }
