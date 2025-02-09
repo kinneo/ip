@@ -1,4 +1,4 @@
-package kin.ui;
+package kin.task;
 
 public class Task {
     protected String description;

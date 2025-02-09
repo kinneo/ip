@@ -1,4 +1,4 @@
-package kin.ui;
+package kin.task;
 
 import java.util.Scanner;
 import java.util.List;
