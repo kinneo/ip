@@ -1,4 +1,6 @@
-public class Events extends Task{
+package kin.ui;
+
+public class Events extends Task {
     protected String from;
     protected String to;
 
