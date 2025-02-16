@@ -17,19 +17,31 @@ import java.util.Random;
 
 import java.util.ArrayList;
 
+import kin.FileHandler;
+
 public class Kin {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
+    private static FileHandler fileHandler;
+
+    public Kin() {
+        String filePath = "C:\\Users\\Asus\\ip\\kintasks.txt"; // Your specified file path
+        fileHandler = new FileHandler(filePath);
+        tasks = fileHandler.loadTasks();  // Load tasks when program starts
+    }
+
     public static void addTask(Task task) {
         tasks.add(task);
+        fileHandler.saveTasks(tasks);
         System.out.println("Roger. I've added this task my g:");
         System.out.println(" " + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work you " + randomString() + "!");
     }
 
-    public static void removeTask(int index){
+    public static void removeTask(int index) {
         Task task = tasks.get(index);
         tasks.remove(index);
+        fileHandler.saveTasks(tasks);
         System.out.println("Roger. I've removed this task my g:");
         System.out.println(" " + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work you " + randomString() + "!");
@@ -51,6 +63,7 @@ public class Kin {
         Task task = tasks.get(index);
         if (!task.isDone){
             task.markAsDone();
+            fileHandler.saveTasks(tasks);
             System.out.println("Solid bruv! I've marked this task as done:");
             System.out.println(" " + task);
         } else {
@@ -62,6 +75,7 @@ public class Kin {
         Task task = tasks.get(index);
         if (task.isDone){
             task.unmarkAsDone();
+            fileHandler.saveTasks(tasks);
             System.out.println("Bro has no discipline, fine... I've unmarked this task:");
             System.out.println(" " + task);
         } else  {
@@ -81,12 +95,14 @@ public class Kin {
         System.out.println("Wagwan my g! The name's Kin");
         System.out.println("What can I do for you today?");
         Scanner in = new Scanner(System.in);
+        Kin kin = new Kin();
 
 
         while (true) {
             try {
                 String line = in.nextLine().trim();
                 if (line.equalsIgnoreCase("bye")) {
+                    fileHandler.saveTasks(tasks);
                     System.out.println("Aite time to bounce, sayonara!");
                     break;
                 } else if (line.equalsIgnoreCase("list")) {
@@ -110,7 +126,7 @@ public class Kin {
                     } else {
                         throw new InvalidTaskNumber("Delete field cannot be empty " + randomString() + "! Please enter a valid number to mark.");
                     }
-                }else if (line.toLowerCase().startsWith("deadline")) {
+                } else if (line.toLowerCase().startsWith("deadline")) {
                     if (line.length() == 8) {
                         throw new InvalidDeadline("Deadline field cannot be empty " + randomString() + "! Use: deadline <task> /by <date>");
                     }
