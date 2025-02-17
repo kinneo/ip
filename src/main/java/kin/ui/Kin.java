@@ -25,9 +25,9 @@ public class Kin {
     private static FileHandler fileHandler;
 
     public Kin() {
-        String filePath = "C:\\Users\\Asus\\ip\\kintasks.txt"; // Your specified file path
+        String filePath = "C:\\Users\\Asus\\ip\\kintasks.txt";
         fileHandler = new FileHandler(filePath);
-        tasks = fileHandler.loadTasks();  // Load tasks when program starts
+        tasks = fileHandler.loadTasks();
     }
 
     public static void addTask(Task task) {
@@ -124,7 +124,7 @@ public class Kin {
                             throw new InvalidTaskNumber("Invalid task number " + randomString() + "! Please enter a valid number to delete.");
                         }
                     } else {
-                        throw new InvalidTaskNumber("Delete field cannot be empty " + randomString() + "! Please enter a valid number to mark.");
+                        throw new InvalidTaskNumber("Delete field cannot be empty " + randomString() + "! Please enter a valid number to delete.");
                     }
                 } else if (line.toLowerCase().startsWith("deadline")) {
                     if (line.length() == 8) {
