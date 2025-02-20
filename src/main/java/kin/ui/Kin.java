@@ -1,6 +1,5 @@
 package kin.ui;
 
-
 import kin.exceptions.InvalidTaskNumber;
 import kin.exceptions.InvalidTodo;
 import kin.exceptions.InvalidDeadline;
@@ -10,14 +9,11 @@ import kin.task.Deadline;
 import kin.task.Events;
 import kin.task.Task;
 import kin.task.Todo;
-
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
-
 import java.util.ArrayList;
-
-import kin.FileHandler;
+import kin.data.FileHandler;
 
 public class Kin {
     private static ArrayList<Task> tasks = new ArrayList<>();

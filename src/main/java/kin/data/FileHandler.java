@@ -1,4 +1,4 @@
-package kin;
+package kin.data;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,8 +7,6 @@ import kin.task.Task;
 import kin.task.Deadline;
 import kin.task.Events;
 import kin.task.Todo;
-
-import static kin.ui.Kin.addTask;
 
 public class FileHandler {
     private String filePath;
