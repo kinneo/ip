@@ -5,6 +5,7 @@ import ChadJibiti.Exceptions.InvalidTodoException;
 import ChadJibiti.Exceptions.InvalidDeadlineException;
 import ChadJibiti.Exceptions.InvalidEventException;
 import ChadJibiti.Exceptions.EmptyTaskListException;
+import ChadJibiti.Exceptions.InvalidFindException;
 import ChadJibiti.TaskList.Deadline;
 import ChadJibiti.TaskList.Events;
 import ChadJibiti.TaskList.Task;
@@ -48,6 +49,15 @@ public class Parser {
         String command = parts[0].toLowerCase();
         try {
             switch(command){
+            case "find":
+                if (line.length() == 4) {
+                    throw new InvalidFindException();
+                }
+                if (tasks.isEmpty()){
+                    throw new EmptyTaskListException();
+                }
+                taskManager.findTask(line.substring(5).trim());
+                break;
             case "todo":
                 if (line.length() == 4) {
                     throw new InvalidTodoException();
@@ -101,7 +111,7 @@ public class Parser {
             }
         } catch (NumberFormatException e){
             System.out.println("Please enter a valid number.");
-        } catch (EmptyTaskListException | InvalidTodoException | InvalidDeadlineException | InvalidEventException | InvalidTaskNumberException | IllegalArgumentException e) {
+        } catch (InvalidFindException | EmptyTaskListException | InvalidTodoException | InvalidDeadlineException | InvalidEventException | InvalidTaskNumberException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("An unexpected error occurred. Please try again.");

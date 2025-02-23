@@ -22,7 +22,29 @@ public class TaskManager {
         return tasks;
     }
 
-    /**
+/**
+ * Searches for tasks in the list that contain the specified keyword and displays the matching tasks.
+ *
+ * @param keyword The keyword used to search for matching tasks in the task list.
+ */
+    public void findTask(String keyword){
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.toString().contains(keyword)){
+                foundTasks.add(task);
+            }
+        }
+        if (foundTasks.isEmpty()){
+            System.out.println("Sorry g, there are no matching tasks in your list.");
+        } else {
+            System.out.println("Roger. Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println((i + 1) + "." + foundTasks.get(i));
+            }
+        }
+    }
+  
+/**
      * Adds a task to the list and saves it to the file.
      *
      * @param task The task to be added.
