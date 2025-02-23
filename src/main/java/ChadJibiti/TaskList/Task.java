@@ -2,7 +2,7 @@ package ChadJibiti.TaskList;
 
 /**
  * Represents a generic task in the task management system.
- *
+ * <p>
  * The Task class serves as a base class for various types of tasks such as Todo, Deadline, and Event.
  * It holds the description of the task and tracks whether the task is completed or not.
  */

@@ -11,6 +11,7 @@ import ChadJibiti.TaskList.Events;
 import ChadJibiti.TaskList.Task;
 import ChadJibiti.TaskList.Todo;
 import ChadJibiti.TaskList.TaskManager;
+
 import java.util.ArrayList;
 
 /**
@@ -37,23 +38,23 @@ public class Parser {
      * Validates the input and handles errors such as invalid task numbers or missing details.
      *
      * @param line The command entered by the user.
-     * @throws InvalidTodoException If the "todo" command is missing a task description.
-     * @throws EmptyTaskListException If the task list is empty when trying to delete, find, mark, or unmark tasks.
-     * @throws InvalidDeadlineException If the "deadline" command is missing the required information or is formatted incorrectly.
-     * @throws InvalidEventException If the "event" command is missing the required information or is formatted incorrectly.
+     * @throws InvalidTodoException       If the "todo" command is missing a task description.
+     * @throws EmptyTaskListException     If the task list is empty when trying to delete, find, mark, or unmark tasks.
+     * @throws InvalidDeadlineException   If the "deadline" command is missing the required information or is formatted incorrectly.
+     * @throws InvalidEventException      If the "event" command is missing the required information or is formatted incorrectly.
      * @throws InvalidTaskNumberException If the task number is invalid or out of bounds.
-     * @throws IllegalArgumentException If the command is not recognized or is invalid.
+     * @throws IllegalArgumentException   If the command is not recognized or is invalid.
      */
-    public void decodeCommand(String line){
+    public void decodeCommand(String line) {
         String[] parts = line.split(" ", 2);
         String command = parts[0].toLowerCase();
         try {
-            switch(command){
+            switch (command) {
             case "find":
                 if (line.length() == 4) {
                     throw new InvalidFindException();
                 }
-                if (tasks.isEmpty()){
+                if (tasks.isEmpty()) {
                     throw new EmptyTaskListException();
                 }
                 taskManager.findTask(line.substring(5).trim());
@@ -65,7 +66,7 @@ public class Parser {
                 taskManager.addTask(new Todo(line.substring(5)));
                 break;
             case "delete":
-                if (tasks.isEmpty()){
+                if (tasks.isEmpty()) {
                     throw new EmptyTaskListException();
                 }
                 int deleteIndex = parseTaskIndex(line, 7);
@@ -93,14 +94,14 @@ public class Parser {
                 taskManager.addTask(new Events(eParts[0], times[0], times[1]));
                 break;
             case "mark":
-                if (tasks.isEmpty()){
+                if (tasks.isEmpty()) {
                     throw new EmptyTaskListException();
                 }
                 int markIndex = parseTaskIndex(line, 5); // Use parseTaskIndex for mark
                 taskManager.markTask(markIndex);
                 break;
             case "unmark":
-                if (tasks.isEmpty()){
+                if (tasks.isEmpty()) {
                     throw new EmptyTaskListException();
                 }
                 int unmarkIndex = parseTaskIndex(line, 7); // Use parseTaskIndex for unmark
@@ -109,9 +110,10 @@ public class Parser {
             default:
                 throw new IllegalArgumentException("Sorry g I don't understand that command. Try again.");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
-        } catch (InvalidFindException | EmptyTaskListException | InvalidTodoException | InvalidDeadlineException | InvalidEventException | InvalidTaskNumberException | IllegalArgumentException e) {
+        } catch (InvalidFindException | EmptyTaskListException | InvalidTodoException | InvalidDeadlineException |
+                 InvalidEventException | InvalidTaskNumberException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("An unexpected error occurred. Please try again.");
@@ -122,7 +124,7 @@ public class Parser {
      * Parses the task index from the user input.
      * The index is adjusted to be zero-based and validated to ensure it is within the valid task list range.
      *
-     * @param line The command entered by the user.
+     * @param line       The command entered by the user.
      * @param startIndex The index where the task number starts in the user input.
      * @return The zero-based task index.
      * @throws InvalidTaskNumberException If the task number is invalid or out of bounds.
@@ -130,7 +132,7 @@ public class Parser {
     private int parseTaskIndex(String line, int startIndex) throws InvalidTaskNumberException {
         if (line.length() >= startIndex && Character.isDigit(line.charAt(startIndex))) {
             int index = Integer.parseInt(line.substring(startIndex).trim()) - 1;
-            if (index >= 0 && index < tasks.size()){
+            if (index >= 0 && index < tasks.size()) {
                 return index;
             } else {
                 throw new InvalidTaskNumberException();

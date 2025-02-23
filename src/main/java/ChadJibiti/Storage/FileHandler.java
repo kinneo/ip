@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import ChadJibiti.TaskList.Task;
 import ChadJibiti.TaskList.Deadline;
 import ChadJibiti.TaskList.Events;
@@ -47,7 +48,7 @@ public class FileHandler {
                 case 'T': // Todo
                     String todoDescription = line.substring(7);
                     Todo todo = new Todo(todoDescription);
-                    if(isDone){
+                    if (isDone) {
                         todo.markAsDone();
                     }
                     tasks.add(todo);
@@ -57,7 +58,7 @@ public class FileHandler {
                     String deadlineDescription = line.substring(7, byIndex - 1);
                     String by = line.substring(byIndex + 5, line.length() - 1);
                     Deadline deadline = new Deadline(deadlineDescription, by);
-                    if(isDone){
+                    if (isDone) {
                         deadline.markAsDone();
                     }
                     tasks.add(deadline);
@@ -69,7 +70,7 @@ public class FileHandler {
                     String from = line.substring(fromIndex + 7, toIndex);
                     String to = line.substring(toIndex + 4, line.length() - 1);
                     Events event = new Events(eventDescription, from, to);
-                    if(isDone){
+                    if (isDone) {
                         event.markAsDone();
                     }
                     tasks.add(event);
