@@ -14,10 +14,21 @@ import ChadJibiti.TaskList.Todo;
 public class FileHandler {
     private String filePath;
 
+    /**
+     * Constructor for FileHandler.
+     *
+     * @param filePath The file path where tasks are saved/loaded.
+     */
     public FileHandler(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from a file and returns them as an ArrayList of Task objects.
+     *
+     * @return An ArrayList of tasks loaded from the file.
+     * @throws FileNotFoundException If the file does not exist or cannot be found.
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -74,10 +85,16 @@ public class FileHandler {
         return tasks;
     }
 
+    /**
+     * Saves tasks to a file.
+     *
+     * @param tasks The list of tasks to be saved.
+     * @throws IOException If there is an error writing to the file.
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Task task : tasks) {
-                writer.write(task.toString() + System.lineSeparator()); // Assuming Task has a meaningful toString() method
+                writer.write(task.toString() + System.lineSeparator());
             }
         } catch (IOException e) {
             System.out.println("Error saving tasks to file: " + e.getMessage());
