@@ -87,7 +87,7 @@ public class TaskManager {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + "." + tasks.get(i));
             }
-            System.out.println("Get to work!");
+            System.out.println("You have " + tasks.size() + " tasks in the list, better get to work!");
         }
     }
 
