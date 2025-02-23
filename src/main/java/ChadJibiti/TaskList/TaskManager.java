@@ -7,6 +7,12 @@ public class TaskManager {
     private ArrayList<Task> tasks;
     private FileHandler fileHandler;
 
+    /**
+     * Constructor for TaskManager.
+     *
+     * @param fileHandler The file handler used for saving tasks.
+     * @param tasks The list of tasks to be managed.
+     */
     public TaskManager(FileHandler fileHandler, ArrayList<Task> tasks) {
         this.fileHandler = fileHandler;
         this.tasks = tasks;
@@ -16,6 +22,11 @@ public class TaskManager {
         return tasks;
     }
 
+    /**
+     * Adds a task to the list and saves it to the file.
+     *
+     * @param task The task to be added.
+     */
     public void addTask(Task task) {
         tasks.add(task);
         fileHandler.saveTasks(tasks);
@@ -24,6 +35,11 @@ public class TaskManager {
         System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work!");
     }
 
+    /**
+     * Removes a task from the list and saves the updated list to the file.
+     *
+     * @param index The index of the task to be removed.
+     */
     public void removeTask(int index) {
         Task task = tasks.get(index);
         tasks.remove(index);
@@ -37,6 +53,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Prints the tasks in the list.
+     */
     public void printTasks() {
         if (tasks.isEmpty()) {
             System.out.println("No tasks found, go take a break or sum.");
@@ -49,6 +68,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Marks a task as done and saves the updated list to the file.
+     *
+     * @param index The index of the task to be marked as done.
+     */
     public void markTask(int index) {
         Task task = tasks.get(index);
         if (!task.isDone){
@@ -61,6 +85,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Unmarks a task as done and saves the updated list to the file.
+     *
+     * @param index The index of the task to be unmarked as done.
+     */
     public void unmarkTask(int index) {
         Task task = tasks.get(index);
         if (task.isDone){

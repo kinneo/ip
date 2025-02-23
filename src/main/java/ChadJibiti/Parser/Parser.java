@@ -12,15 +12,37 @@ import ChadJibiti.TaskList.Todo;
 import ChadJibiti.TaskList.TaskManager;
 import java.util.ArrayList;
 
+/**
+ * The Parser class processes user commands and converts them into corresponding actions
+ * on the TaskManager. It validates the input and handles different task-related commands
+ * such as adding, deleting, marking, unmarking and finding tasks.
+ */
 public class Parser {
     private TaskManager taskManager;
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for the Parser class.
+     *
+     * @param taskManager The TaskManager instance used to manage tasks.
+     */
     public Parser(TaskManager taskManager) {
         this.taskManager = taskManager;
         this.tasks = taskManager.getTasks();
     }
 
+    /**
+     * Decodes the user's command and performs the corresponding task operation.
+     * Validates the input and handles errors such as invalid task numbers or missing details.
+     *
+     * @param line The command entered by the user.
+     * @throws InvalidTodoException If the "todo" command is missing a task description.
+     * @throws EmptyTaskListException If the task list is empty when trying to delete, find, mark, or unmark tasks.
+     * @throws InvalidDeadlineException If the "deadline" command is missing the required information or is formatted incorrectly.
+     * @throws InvalidEventException If the "event" command is missing the required information or is formatted incorrectly.
+     * @throws InvalidTaskNumberException If the task number is invalid or out of bounds.
+     * @throws IllegalArgumentException If the command is not recognized or is invalid.
+     */
     public void decodeCommand(String line){
         String[] parts = line.split(" ", 2);
         String command = parts[0].toLowerCase();
@@ -86,6 +108,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the task index from the user input.
+     * The index is adjusted to be zero-based and validated to ensure it is within the valid task list range.
+     *
+     * @param line The command entered by the user.
+     * @param startIndex The index where the task number starts in the user input.
+     * @return The zero-based task index.
+     * @throws InvalidTaskNumberException If the task number is invalid or out of bounds.
+     */
     private int parseTaskIndex(String line, int startIndex) throws InvalidTaskNumberException {
         if (line.length() >= startIndex && Character.isDigit(line.charAt(startIndex))) {
             int index = Integer.parseInt(line.substring(startIndex).trim()) - 1;
