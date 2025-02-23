@@ -53,7 +53,7 @@ public class ChadJibiti {
         Scanner in = new Scanner(System.in);
 
         // Initialize ChadJibiti, TaskManager, and Parser
-        ChadJibiti chatJibiti = new ChadJibiti();
+        ChadJibiti chadJibiti = new ChadJibiti();
         TaskManager taskManager = new TaskManager(fileHandler, tasks);
         Parser parser = new Parser(taskManager);
 
