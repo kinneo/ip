@@ -1,4 +1,4 @@
-package ChadJibiti.exceptions;
+package ChadJibiti.Exceptions;
 
 public class EmptyTaskListException extends Exception {
     public EmptyTaskListException() { super("Your list is currently empty, go take a break you deserve it."); }

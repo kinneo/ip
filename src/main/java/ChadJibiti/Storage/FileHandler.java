@@ -1,12 +1,15 @@
-package ChadJibiti.storage;
+package ChadJibiti.Storage;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import ChadJibiti.task.Task;
-import ChadJibiti.task.Deadline;
-import ChadJibiti.task.Events;
-import ChadJibiti.task.Todo;
+import ChadJibiti.TaskList.Task;
+import ChadJibiti.TaskList.Deadline;
+import ChadJibiti.TaskList.Events;
+import ChadJibiti.TaskList.Todo;
 
 public class FileHandler {
     private String filePath;
@@ -15,13 +18,12 @@ public class FileHandler {
         this.filePath = filePath;
     }
 
-    // Load tasks from file
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
 
         if (!file.exists()) {
-            return tasks; // Return empty list if file does not exist
+            return tasks;
         }
 
         try (Scanner scanner = new Scanner(file)) {
@@ -32,7 +34,6 @@ public class FileHandler {
 
                 switch (taskType) {
                 case 'T': // Todo
-                    //System.out.println("Recognized todo task: " + line);
                     String todoDescription = line.substring(7);
                     Todo todo = new Todo(todoDescription);
                     if(isDone){
@@ -41,7 +42,6 @@ public class FileHandler {
                     tasks.add(todo);
                     break;
                 case 'D': // Deadline
-                    //System.out.println("Recognized deadline task: " + line);
                     int byIndex = line.indexOf("(by: ");
                     String deadlineDescription = line.substring(7, byIndex - 1);
                     String by = line.substring(byIndex + 5, line.length() - 1);
@@ -52,7 +52,6 @@ public class FileHandler {
                     tasks.add(deadline);
                     break;
                 case 'E': // Event
-                    //System.out.println("Recognized event task: " + line);
                     int fromIndex = line.indexOf("(from: ");
                     int toIndex = line.indexOf("to: ");
                     String eventDescription = line.substring(7, fromIndex - 1);
@@ -75,7 +74,6 @@ public class FileHandler {
         return tasks;
     }
 
-    // Save tasks to file
     public void saveTasks(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Task task : tasks) {

@@ -1,4 +1,4 @@
-package ChadJibiti.task;
+package ChadJibiti.TaskList;
 
 public class Deadline extends Task {
     protected String by;

@@ -1,4 +1,4 @@
-package ChadJibiti.task;
+package ChadJibiti.TaskList;
 
 public class Todo extends Task{
 

@@ -1,10 +1,11 @@
-package ChadJibiti.ui;
+package ChadJibiti.Ui;
 
-import ChadJibiti.task.Task;
+import ChadJibiti.TaskList.Task;
 import java.util.Scanner;
 import java.util.ArrayList;
-import ChadJibiti.storage.FileHandler;
-import ChadJibiti.storage.TaskManager;
+import ChadJibiti.Storage.FileHandler;
+import ChadJibiti.TaskList.TaskManager;
+import ChadJibiti.Parser.Parser;
 
 public class ChadJibiti {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -35,6 +36,7 @@ public class ChadJibiti {
         Scanner in = new Scanner(System.in);
         ChadJibiti kin = new ChadJibiti();
         TaskManager taskManager = new TaskManager(fileHandler, tasks);
+        Parser parser = new Parser(taskManager);
 
         while (true) {
             try {
@@ -46,7 +48,7 @@ public class ChadJibiti {
                 } else if (line.equalsIgnoreCase("list")) {
                     taskManager.printTasks();
                 } else {
-                    taskManager.decodeCommand(line);
+                    parser.decodeCommand(line);
                 }
             } catch (Exception e){
                 System.out.println(e.getMessage());

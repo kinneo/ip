@@ -1,4 +1,4 @@
-package ChadJibiti.task;
+package ChadJibiti.TaskList;
 
 public class Events extends Task {
     protected String from;
