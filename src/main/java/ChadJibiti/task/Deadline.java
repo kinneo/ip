@@ -1,4 +1,4 @@
-package kin.task;
+package ChadJibiti.task;
 
 public class Deadline extends Task {
     protected String by;

@@ -1,4 +1,4 @@
-package kin.task;
+package ChadJibiti.task;
 
 public class Todo extends Task{
 

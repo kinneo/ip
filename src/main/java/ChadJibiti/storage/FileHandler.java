@@ -1,12 +1,12 @@
-package kin.data;
+package ChadJibiti.storage;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import kin.task.Task;
-import kin.task.Deadline;
-import kin.task.Events;
-import kin.task.Todo;
+import ChadJibiti.task.Task;
+import ChadJibiti.task.Deadline;
+import ChadJibiti.task.Events;
+import ChadJibiti.task.Todo;
 
 public class FileHandler {
     private String filePath;

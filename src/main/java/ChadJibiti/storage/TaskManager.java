@@ -1,16 +1,14 @@
-package kin.data;
+package ChadJibiti.storage;
 
-import kin.exceptions.InvalidTaskNumberException;
-import kin.exceptions.InvalidTodoException;
-import kin.exceptions.InvalidDeadlineException;
-import kin.exceptions.InvalidEventException;
-import kin.exceptions.EmptyTaskListException;
-import kin.task.Deadline;
-import kin.task.Events;
-import kin.task.Task;
-import kin.task.Todo;
-import java.util.List;
-import java.util.Random;
+import ChadJibiti.exceptions.InvalidTaskNumberException;
+import ChadJibiti.exceptions.InvalidTodoException;
+import ChadJibiti.exceptions.InvalidDeadlineException;
+import ChadJibiti.exceptions.InvalidEventException;
+import ChadJibiti.exceptions.EmptyTaskListException;
+import ChadJibiti.task.Deadline;
+import ChadJibiti.task.Events;
+import ChadJibiti.task.Task;
+import ChadJibiti.task.Todo;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -100,10 +98,10 @@ public class TaskManager {
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Sorry g I don't understand that command. Try again " + randomString() + ".");
+                throw new IllegalArgumentException("Sorry g I don't understand that command. Try again.");
             }
         } catch (NumberFormatException e){
-            System.out.println("Please enter a valid number " + randomString() + ".");
+            System.out.println("Please enter a valid number.");
         } catch (EmptyTaskListException | InvalidTodoException | InvalidDeadlineException | InvalidEventException | InvalidTaskNumberException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
@@ -116,7 +114,7 @@ public class TaskManager {
         fileHandler.saveTasks(tasks);
         System.out.println("Roger. I've added this task my g:");
         System.out.println(" " + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work you " + randomString() + "!");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work!");
     }
 
     public void removeTask(int index) {
@@ -125,7 +123,7 @@ public class TaskManager {
         fileHandler.saveTasks(tasks);
         System.out.println("Roger. I've removed this task my g:");
         System.out.println(" " + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work you " + randomString() + "!");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list, better get to work!");
     }
 
     public void printTasks() {
@@ -136,7 +134,7 @@ public class TaskManager {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + "." + tasks.get(i));
             }
-            System.out.println("Get to work you " + randomString() + "!");
+            System.out.println("Get to work!");
         }
     }
 
@@ -148,7 +146,7 @@ public class TaskManager {
             System.out.println("Solid bruv! I've marked this task as done:");
             System.out.println(" " + task);
         } else {
-            System.out.println("Task is already marked " + randomString() + "!");
+            System.out.println("Task is already marked!");
         }
     }
 
@@ -160,20 +158,7 @@ public class TaskManager {
             System.out.println("Bro has no discipline, fine... I've unmarked this task:");
             System.out.println(" " + task);
         } else  {
-            System.out.println(randomString() + ", task is already unmarked!");
+            System.out.println("Task is already unmarked!");
         }
-    }
-
-    public static String randomString() {
-        List<String> list = List.of(
-                "dummy", "stupid", "loser", "dum dum",
-                "failure", "bum", "airhead", "lazy bum",
-                "useless", "dumbass", "idiot", "dimwit",
-                "doofus", "noob", "noobie", "pathetic",
-                "wimp", "dork", "dweeb", "BAKAAA",
-                "fool", "pea brain", "clown", "meathead",
-                "goofball", "dunce"
-        );
-        return list.get(new Random().nextInt(list.size()));
     }
 }
