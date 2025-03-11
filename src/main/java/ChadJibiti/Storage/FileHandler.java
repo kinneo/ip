@@ -21,7 +21,21 @@ public class FileHandler {
      * @param filePath The file path where tasks are saved/loaded.
      */
     public FileHandler(String filePath) {
+
         this.filePath = filePath;
+        File file = new File(filePath);
+        File directory = file.getParentFile();
+
+        try{
+            if (directory != null && !directory.exists()) {
+                directory.mkdirs();
+            }
+            if (!file.exists()){
+                file.createNewFile();
+            }
+        } catch (IOException e){
+            System.out.println("Error initializing file: " + e.getMessage());
+        }
     }
 
     /**

@@ -1,4 +1,0 @@
-[E][ ] meeting (from: 13 Feb 2025 11:00 AM to: 13 Feb 2025 4:00 PM)
-[T][X] return book
-[D][ ] CS2113 assignment (by: next monday)
-[T][ ] CS1010 assignment

@@ -2,6 +2,7 @@ package ChadJibiti.Ui;
 
 import ChadJibiti.TaskList.Task;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,13 +17,17 @@ import ChadJibiti.Parser.Parser;
 public class ChadJibiti {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static FileHandler fileHandler;
+    private static String filePath;
 
     /**
-     * Constructor for ChadJibiti.
-     * Initializes the file handler and loads tasks from txt file.
+     * Initializes ChadJibiti with a user-specific task file in the home directory.
+     * Creates the file if it doesn't exist and loads tasks dynamically.
      */
-    public ChadJibiti() {
-        String filePath = "C:\\Users\\Asus\\ip\\kintasks.txt";
+    public ChadJibiti(){
+        String userHome = System.getProperty("user.home");
+        String directoryPath = userHome + File.separator + "ChadJibiti";
+        filePath = directoryPath + File.separator + "tasks.txt";
+
         fileHandler = new FileHandler(filePath);
         tasks = fileHandler.loadTasks();
     }
@@ -48,7 +53,7 @@ public class ChadJibiti {
 
         System.out.println(logo);
 
-        System.out.println("Wagwan my g! My name is Chad Jibiti");
+        System.out.println("Wagwan my g! My name is Chad Jibiti.");
         System.out.println("What can I do for you today?");
         Scanner in = new Scanner(System.in);
 
@@ -67,6 +72,8 @@ public class ChadJibiti {
                     break;
                 } else if (line.equalsIgnoreCase("list")) {
                     taskManager.printTasks();
+                } else if (line.equalsIgnoreCase("filepath")){
+                    System.out.println("Tasks file should be created at: " + filePath);
                 } else {
                     parser.decodeCommand(line);
                 }
