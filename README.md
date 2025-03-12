@@ -1,26 +1,74 @@
-# Duke project template
+# ChadJibiti - Task Manager
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+ChadJibiti is a task manager application that allows users to add, remove, mark, unmark, find, and list tasks. It stores tasks in a file and allows users to interact with tasks using simple commands. This application is designed to help users manage their tasks efficiently through a command-line interface.
 
-## Setting up in Intellij
+## Features
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Add Tasks
+Users can add tasks to the list (To-Do, Deadline, Event).
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+Example: `event meeting /from 13/02/2025 1100 /to 13/02/2025 1600`
+```
+Roger. I've added this task my g:
+ [E][ ] meeting (from: 13 Feb 2025 11:00 AM to: 13 Feb 2025 4:00 PM)
+Now you have 1 tasks in the list, better get to work!
+```
+Example: `deadline CS2113 assignment /by next monday`
+```
+Roger. I've added this task my g:
+ [D][ ] CS2113 assignment (by: next monday)
+Now you have 2 tasks in the list, better get to work!
+```
+Example: `todo return book`
+```
+Roger. I've added this task my g:
+ [T][ ] return book
+Now you have 3 tasks in the list, better get to work!
+```
+
+
+### Remove tasks
+Tasks can be removed from the list.
+
+Example: `delete 2`
+```
+Roger. I've removed this task my g:
+[D][ ] CS2113 assignment (by: next monday)
+Now you have 2 tasks in the list, better get to work!
+```
+
+
+### Mark and Unmark tasks
+Tasks can be marked as completed or unmarked if they are completed.
+
+Example: `mark 2`
+```
+Solid bruv! I've marked this task as done:
+ [T][X] return book
+```
+
+
+### Find tasks
+Tasks can be searched by keyword.
+
+Example: `find assignment`
+```
+Roger. Here are the matching tasks in your list:
+1.[D][ ] CS2113 assignment (by: next monday)
+2.[T][ ] CS1010 assignment
+```
+
+
+### Display tasks
+Users can view all the tasks in the list.
+
+Example: `list`
+```
+Here are the tasks in your list:
+1.[E][ ] meeting (from: 13 Feb 2025 11:00 AM to: 13 Feb 2025 4:00 PM)
+2.[T][X] return book
+3.[D][ ] CS2113 assignment (by: next monday)
+4.[T][ ] CS1010 assignment
+You have 4 tasks in the list, better get to work!
+```
